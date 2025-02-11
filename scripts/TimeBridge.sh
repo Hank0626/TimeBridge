@@ -14,7 +14,7 @@ model_name=TimeBridge
 seq_len=720
 GPU=0,1
 # root=./dataset
-root=/Users/lpy/Desktop/Hank/Research/iTransformer_datasets
+root=./dataset
 
 alpha=0.35
 data_name=ETTh1
