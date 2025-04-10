@@ -12,11 +12,11 @@ if __name__ == '__main__':
     torch.manual_seed(fix_seed)
     np.random.seed(fix_seed)
 
-    parser = argparse.ArgumentParser(description='iTransformer')
+    parser = argparse.ArgumentParser(description='TimeBridge')
 
     # ablation control flags
     parser.add_argument('--revin', action='store_false', help='non-stationary for short-term', default=True)
-    parser.add_argument('--alpha', type=float, default=0.2, help='factor of frequency loss')
+    parser.add_argument('--alpha', type=float, default=0.2, help='weight of time-frequency MAE loss')
     parser.add_argument('--dropout', type=float, default=0.0, help='dropout')
     parser.add_argument('--attn_dropout', type=float, default=0.15, help='dropout')
     parser.add_argument('--batch_size', type=int, default=32, help='batch size of train input data')
@@ -24,8 +24,7 @@ if __name__ == '__main__':
     # basic config
     parser.add_argument('--is_training', type=int, required=True, default=1, help='status')
     parser.add_argument('--model_id', type=str, required=True, default='test', help='model id')
-    parser.add_argument('--model', type=str, required=True, default='iTransformer',
-                        help='model name, options: [iTransformer, iInformer, iReformer, iFlowformer, iFlashformer]')
+    parser.add_argument('--model', type=str, required=True, default='TimeBridge', help='model name')
 
     # data loader
     parser.add_argument('--data', type=str, required=True, default='custom', help='dataset type')
@@ -39,50 +38,27 @@ if __name__ == '__main__':
     parser.add_argument('--checkpoints', type=str, default='./checkpoints/', help='location of model checkpoints')
 
     # forecasting task
-    parser.add_argument('--wo_time', action='store_true', help='dont use timestamp', default=False)
     parser.add_argument('--seq_len', type=int, default=96, help='input sequence length')
     parser.add_argument('--label_len', type=int, default=48, help='start token length') # no longer needed in inverted Transformers
     parser.add_argument('--pred_len', type=int, default=96, help='prediction sequence length')
     parser.add_argument('--seasonal_patterns', type=str, default='Monthly', help='subset for M4')
 
     # model define
-    parser.add_argument('--t_layers', type=int, default=1, help='num of temporal layers')
-    parser.add_argument('--stable_len', type=int, default=6, help='num of temporal layers')
-    parser.add_argument('--use_group', action='store_true', default=False)
-    parser.add_argument('--random', action='store_true', default=False)
-    parser.add_argument('--router', type=int, default=None, help='num of router')
-    parser.add_argument('--zero', type=str, default=None, help='zero of ac/dc')
-    parser.add_argument('--attn_type', type=int, default=None, help='type of attention mode. 0 channel 1 segment')
-    parser.add_argument('--temporal', action='store_true', default=False)
-    # parser.add_argument('--alpha', type=float, default=0.1, help='frequency save of original ac')
-    parser.add_argument('--Asym', action='store_false', help='use Asymmetric self-attention', default=True)
-    parser.add_argument('--kernel', type=int, default=25, help='size of window, 7 12 24 36 ...')
-    parser.add_argument('--wavelet', type=str, default='coif3',  help='the wavelet use')
-    parser.add_argument('--layer_norm', action='store_false', default=True)
-    parser.add_argument('--group', type=int, default=None, help='num of group')
-    parser.add_argument('--num_p', type=int, default=None, help='num of kernel')
-    parser.add_argument('--period', type=int, default=24, help='num of kernel')
-    parser.add_argument('--ratio', type=int, default=1, help='times of num_p')
-    parser.add_argument('--periods', type=int, nargs='+', default=None, help='num of kernel')
+    parser.add_argument('--ia_layers', type=int, default=1, help='num of integrated attention layers')
+    parser.add_argument('--pd_layers', type=int, default=1, help='num of patch downsampled layers')
+    parser.add_argument('--ca_layers', type=int, default=0, help='num of cointegrated attention layers')
+    
+    parser.add_argument('--stable_len', type=int, default=6, help='length of moving average in patch norm')
+    parser.add_argument('--num_p', type=int, default=None, help='num of down sampled patches')
+    
+    parser.add_argument('--period', type=int, default=24, help='length of patches')
 
     parser.add_argument('--enc_in', type=int, default=7, help='channel_decoder input size')
-    parser.add_argument('--dec_in', type=int, default=7, help='channel_decoder input size')
-    parser.add_argument('--c_in', type=int, default=None, help='input size') # applicable on arbitrary number of variates in inverted Transformers
-    parser.add_argument('--sz_row', type=int, default=None, help='input size') # applicable on arbitrary number of variates in inverted Transformers
-    parser.add_argument('--c_out', type=int, default=7, help='output size') # applicable on arbitrary number of variates in inverted Transformers
     parser.add_argument('--d_model', type=int, default=512, help='dimension of model')
     parser.add_argument('--n_heads', type=int, default=8, help='num of heads')
-    parser.add_argument('--e_layers', type=int, default=0, help='num of fc1 layers')
-    parser.add_argument('--d_layers', type=int, default=1, help='num of channel_decoder layers')
     parser.add_argument('--d_ff', type=int, default=2048, help='dimension of fcn')
-    parser.add_argument('--moving_avg', type=int, default=25, help='window size of moving average')
-    parser.add_argument('--factor', type=int, default=1, help='attn factor')
-    parser.add_argument('--k_segments', type=int, default=1, help='number of segments')
-    parser.add_argument('--distil', action='store_false',
-                        help='whether to use distilling in fc1, using this argument means not using distilling',
-                        default=True)
-    parser.add_argument('--embed', type=str, default='timeF',
-                        help='time features encoding, options:[timeF, fixed, learned]')
+
+    parser.add_argument('--embed', type=str, default='timeF', help='time features encoding, options:[timeF, fixed, learned]')
     parser.add_argument('--activation', type=str, default='gelu', help='activation')
     parser.add_argument('--output_attention', action='store_true', help='whether to output attention in ecoder')
 
@@ -105,12 +81,7 @@ if __name__ == '__main__':
     parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
     parser.add_argument('--devices', type=str, default='0,1,2,3', help='device ids of multile gpus')
 
-    parser.add_argument('--efficient_training', type=bool, default=False, help='whether to use efficient_training (exp_name should be partial train)')
-    parser.add_argument('--channel_independence', type=bool, default=False, help='whether to use channel_independence mechanism')
     parser.add_argument('--inverse', action='store_true', help='inverse output data', default=False)
-    parser.add_argument('--class_strategy', type=str, default='projection', help='projection/average/cls_token')
-    parser.add_argument('--target_root_path', type=str, default='./data/electricity/', help='root path of the data file')
-    parser.add_argument('--target_data_path', type=str, default='electricity.csv', help='data file')
 
     args = parser.parse_args()
     args.use_gpu = True if torch.cuda.is_available() and args.use_gpu else False
@@ -129,24 +100,23 @@ if __name__ == '__main__':
     if args.is_training:
         for ii in range(args.itr):
             # setting record of experiments
-            setting = '{}_{}_{}_{}_ft{}_sl{}_ll{}_pl{}_dm{}_nh{}_el{}_dl{}_df{}_fc{}_eb{}_dt{}_{}_{}'.format(
+            setting = '{}_{}_{}_bs{}_ft{}_sl{}_ll{}_pl{}_dm{}_nh{}_ial{}_pdl{}_cal{}_df{}_eb{}_{}_{}'.format(
                 args.model_id,
                 args.model,
                 args.data,
+                args.batch_size,
                 args.features,
                 args.seq_len,
                 args.label_len,
                 args.pred_len,
                 args.d_model,
                 args.n_heads,
-                args.e_layers,
-                args.d_layers,
+                args.ia_layers,
+                args.pd_layers,
+                args.ca_layers,
                 args.d_ff,
-                args.factor,
                 args.embed,
-                args.distil,
-                args.des,
-                args.class_strategy, ii)
+                args.des, ii)
 
             exp = Exp(args)  # set experiments
             print('>>>>>>>start training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))
@@ -157,24 +127,23 @@ if __name__ == '__main__':
             torch.cuda.empty_cache()
     else:
         ii = 0
-        setting = '{}_{}_{}_{}_ft{}_sl{}_ll{}_pl{}_dm{}_nh{}_el{}_dl{}_df{}_fc{}_eb{}_dt{}_{}_{}'.format(
+        setting = '{}_{}_{}_bs{}_ft{}_sl{}_ll{}_pl{}_dm{}_nh{}_ial{}_pdl{}_cal{}_df{}_eb{}_{}_{}'.format(
             args.model_id,
             args.model,
             args.data,
+            args.batch_size,
             args.features,
             args.seq_len,
             args.label_len,
             args.pred_len,
             args.d_model,
             args.n_heads,
-            args.e_layers,
-            args.d_layers,
+            args.ia_layers,
+            args.pd_layers,
+            args.ca_layers,
             args.d_ff,
-            args.factor,
             args.embed,
-            args.distil,
-            args.des,
-            args.class_strategy, ii)
+            args.des, ii)
 
         exp = Exp(args)  # set experiments
         print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))

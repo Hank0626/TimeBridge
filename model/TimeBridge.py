@@ -24,7 +24,7 @@ class Model(nn.Module):
         layers = self.layers_init(configs)
         self.encoder = TSEncoder(layers)
 
-        out_p = self.num_p if configs.d_layers == 0 else configs.num_p
+        out_p = self.num_p if configs.pd_layers == 0 else configs.num_p
         self.decoder = nn.Sequential(
             nn.Flatten(start_dim=-2),
             nn.Linear(out_p * configs.d_model, configs.pred_len, bias=False)
@@ -35,21 +35,21 @@ class Model(nn.Module):
             TSMixer(ResAttention(attention_dropout=configs.attn_dropout), configs.d_model, configs.n_heads),
             configs.d_model, configs.d_ff, dropout=configs.dropout, stable_len=configs.stable_len,
             activation=configs.activation, stable=True, enc_in=self.c_in
-        ) for i in range(configs.t_layers)]
+        ) for i in range(configs.ia_layers)]
 
         patch_sampling = [PatchSampling(
             TSMixer(ResAttention(attention_dropout=configs.attn_dropout), configs.d_model, configs.n_heads),
             configs.d_model, configs.d_ff, stable=False, stable_len=configs.stable_len,
             in_p=self.num_p if i == 0 else configs.num_p, out_p=configs.num_p,
             dropout=configs.dropout, activation=configs.activation
-        ) for i in range(configs.d_layers)]
+        ) for i in range(configs.pd_layers)]
 
         cointegrated_attention = [CointAttention(
             TSMixer(ResAttention(attention_dropout=configs.attn_dropout),
                     configs.d_model, configs.n_heads),
             configs.d_model, configs.d_ff, dropout=configs.dropout,
             activation=configs.activation, stable=False, enc_in=self.c_in, stable_len=configs.stable_len,
-        ) for i in range(configs.e_layers)]
+        ) for i in range(configs.ca_layers)]
 
         return [*integrated_attention, *patch_sampling, *cointegrated_attention]
 
