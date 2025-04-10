@@ -34,7 +34,7 @@ do
     --enc_in 7 \
     --ca_layers 0 \
     --pd_layers 1 \
-    --ia_layers 3 \
+    --ia_layers 1 \
     --des 'Exp' \
     --d_model 128 \
     --d_ff 128 \
