@@ -105,9 +105,6 @@ if __name__ == '__main__':
     parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
     parser.add_argument('--devices', type=str, default='0,1,2,3', help='device ids of multile gpus')
 
-    # iTransformer
-    parser.add_argument('--exp_name', type=str, required=False, default='None',
-                        help='experiment name, options:[station_train, partial_train, zero_shot]')
     parser.add_argument('--efficient_training', type=bool, default=False, help='whether to use efficient_training (exp_name should be partial train)')
     parser.add_argument('--channel_independence', type=bool, default=False, help='whether to use channel_independence mechanism')
     parser.add_argument('--inverse', action='store_true', help='inverse output data', default=False)
@@ -127,13 +124,7 @@ if __name__ == '__main__':
     print('Args in experiment:')
     print(args)
 
-    if args.exp_name == 'partial_train':
-        Exp = Exp_Long_Term_Forecast_Partial
-    elif args.exp_name == 'station_train':
-        Exp = Exp_Long_Term_Forecast_Station
-    else:
-        Exp = Exp_Long_Term_Forecast
-
+    Exp = Exp_Long_Term_Forecast
 
     if args.is_training:
         for ii in range(args.itr):
