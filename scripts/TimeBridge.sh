@@ -191,7 +191,7 @@ do
     --d_model 128 \
     --d_ff 128 \
     --alpha $alpha \
-    --itr 1 >logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$pred_len.logs
+    --itr 1 >logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
 
 alpha=0.05
@@ -256,7 +256,7 @@ do
     --alpha $alpha \
     --batch_size 16 \
     --learning_rate 0.0005 \
-    --itr 1 >logs/LongForecasting/TimeBridge/$data_name'_'$seq_len'_'$pred_len.logs
+    --itr 1 >logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
 
 alpha=0.35
@@ -293,5 +293,5 @@ for pred_len in 336 192 720 96; do
     --use_multi_gpu \
     --alpha $alpha \
     --learning_rate 0.001 \
-    --itr 1 >logs/LongForecasting/TimeBridge/$data_name'_'$seq_len'_'$pred_len.log
+    --itr 1 >logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
