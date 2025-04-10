@@ -67,7 +67,7 @@ do
     --period 48 \
     --ca_layers 0 \
     --pd_layers 1 \
-    --ia_layers 1 \
+    --ia_layers 3 \
     --ca_layers 0 \
     --des 'Exp' \
     --n_heads 4 \
@@ -102,7 +102,7 @@ do
     --enc_in 7 \
     --ca_layers 0 \
     --pd_layers 1 \
-    --ia_layers 1 \
+    --ia_layers 3 \
     --des 'Exp' \
     --n_heads 4 \
     --d_model 64 \
