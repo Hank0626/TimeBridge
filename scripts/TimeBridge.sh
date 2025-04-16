@@ -13,7 +13,7 @@ fi
 model_name=TimeBridge
 seq_len=720
 GPU=0
-root=/data1/liupeiyuan/dataset/datasets # ./dataset
+root=./dataset
 
 alpha=0.35
 data_name=ETTh1
