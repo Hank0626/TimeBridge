@@ -43,7 +43,7 @@ do
     --learning_rate 0.0002 \
     --train_epochs 100 \
     --patience 10 \
-    --itr 3 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
+    --itr 1 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
 
 
@@ -79,7 +79,7 @@ do
     --patience 15 \
     --alpha $alpha \
     --batch_size 16 \
-    --itr 3 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
+    --itr 1 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
 
 
@@ -116,7 +116,7 @@ do
     --patience 15 \
     --batch_size 64 \
     --alpha $alpha \
-    --itr 3 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
+    --itr 1 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
 
 alpha=0.35
@@ -152,7 +152,7 @@ do
     --patience 10 \
     --batch_size 64 \
     --alpha $alpha \
-    --itr 3 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
+    --itr 1 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
 
 
@@ -182,7 +182,7 @@ do
     --d_model 128 \
     --d_ff 128 \
     --alpha $alpha \
-    --itr 3 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
+    --itr 1 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
 
 
@@ -208,13 +208,14 @@ do
     --ia_layers 1 \
     --des 'Exp' \
     --period 48 \
+    --num_p 12 \
     --d_model 128 \
     --d_ff 128 \
     --alpha $alpha \
     --learning_rate 0.0005 \
     --train_epochs 100 \
     --patience 15 \
-    --itr 3 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
+    --itr 1 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
 
 alpha=0.2
@@ -247,13 +248,13 @@ do
     --alpha $alpha \
     --batch_size 16 \
     --learning_rate 0.0005 \
-    --itr 3 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
+    --itr 1 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
 
 alpha=0.35
 data_name=traffic
-GPU=0,1,2,3
-for pred_len in 96 192 336 720; do
+GPU=0,1
+for pred_len in 336 720; do
   CUDA_VISIBLE_DEVICES=$GPU \
   python -u run.py \
     --is_training 1 \
@@ -276,13 +277,13 @@ for pred_len in 96 192 336 720; do
     --ca_layers 3 \
     --pd_layers 1 \
     --ia_layers 1 \
-    --batch_size 8 \
+    --batch_size 16 \
     --attn_dropout 0.15 \
     --patience 5 \
     --train_epochs 100 \
-    --devices 0,1,2,3 \
+    --devices 0,1 \
     --use_multi_gpu \
     --alpha $alpha \
     --learning_rate 0.001 \
-    --itr 3 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
+    --itr 1 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
