@@ -1,13 +1,20 @@
 # TimeBridge: Non-Stationarity Matters for Long-term Time Series Forecasting
-[[中文解读1](https://mp.weixin.qq.com/s/bCEWRvU-dBNwa2FxwaTMHQ)][[中文解读2](https://mp.weixin.qq.com/s/oFw5rXvbtqgL8clhucsAnQ)]
 
-## Updates/News 🆕
+<div align="center">
+**[<a href="https://mp.weixin.qq.com/s/bCEWRvU-dBNwa2FxwaTMHQ">中文解读1</a>]**
+**[<a href="https://mp.weixin.qq.com/s/oFw5rXvbtqgL8clhucsAnQ">中文解读2</a>]**
 
-🚩 **Updates** (2025-02-11) Release the code.
+</div>
 
-🚩 **Updates** (2024-10-08) Initial upload to arXiv [[PDF]](https://arxiv.org/abs/2410.04442).
+## 🚨 Updates
 
-## Usage
+🚩 **2025-04-18:** Release the detailed training logs (see [_logs](./_logs/)).
+
+🚩 **2025-02-11:** Release the code.
+
+🚩 **2024-10-08:** Initial upload to arXiv [[PDF]](https://arxiv.org/abs/2410.04442).
+
+## 📦 Usage
 
 1. Install the dependencies
     ```bash
@@ -43,7 +50,7 @@
     ```
 
 
-## Bibtex
+## 📚 Bibtex 
 If you find this work useful, please consider citing it:
 
 ```
@@ -56,7 +63,5 @@ If you find this work useful, please consider citing it:
 }
 ```
 
-## Contact
+## 📬 Contact
 If you have any questions, please contact [lpy23@mails.tsinghua.edu.cn](lpy23@mails.tsinghua.edu.cn) or submit an issue.
-
-
