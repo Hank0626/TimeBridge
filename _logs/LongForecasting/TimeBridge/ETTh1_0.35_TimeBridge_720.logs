@@ -1,0 +1,69 @@
+Args in experiment:
+Namespace(revin=True, alpha=0.35, dropout=0.0, attn_dropout=0.15, batch_size=64, is_training=1, model_id='ETTh1_720_720', model='TimeBridge', data='ETTh1', root_path='/data1/liupeiyuan/dataset/datasets/ETT-small/', data_path='ETTh1.csv', features='M', target='OT', freq='h', checkpoints='./checkpoints/', seq_len=720, label_len=48, pred_len=720, seasonal_patterns='Monthly', ia_layers=3, pd_layers=1, ca_layers=0, stable_len=6, num_p=None, period=24, enc_in=7, d_model=128, n_heads=8, d_ff=128, embed='timeF', activation='gelu', output_attention=False, num_workers=10, itr=1, train_epochs=100, embedding_epochs=5, patience=10, pct_start=0.2, learning_rate=0.0002, embedding_lr=0.0005, des='Exp', loss='MSE', lradj='type1', use_gpu=True, gpu=0, use_multi_gpu=False, devices='0,1,2,3', inverse=False)
+Use GPU: cuda:0
+>>>>>>>start training : ETTh1_720_720_TimeBridge_ETTh1_bs64_ftM_sl720_ll48_pl720_dm128_nh8_ial3_pdl1_cal0_df128_ebtimeF_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+train 7201
+val 2161
+test 2161
+	iters: 100, epoch: 1 | loss: 3.6145418
+	speed: 0.0394s/iter; left time: 437.0516s
+Epoch: 1 cost time: 4.299888372421265
+Epoch: 1, Steps: 112 | Train Loss: 3.8054716 Vali Loss: 1.4686054 Test Loss: 0.4432241
+Validation loss decreased (inf --> 1.468605).  Saving model ...
+	iters: 100, epoch: 2 | loss: 3.6090555
+	speed: 0.1587s/iter; left time: 1744.4715s
+Epoch: 2 cost time: 3.455003499984741
+Epoch: 2, Steps: 112 | Train Loss: 3.5882348 Vali Loss: 1.4986989 Test Loss: 0.4434247
+EarlyStopping counter: 1 out of 10
+	iters: 100, epoch: 3 | loss: 3.5291891
+	speed: 0.1720s/iter; left time: 1870.4922s
+Epoch: 3 cost time: 3.4705939292907715
+Epoch: 3, Steps: 112 | Train Loss: 3.5385366 Vali Loss: 1.4800526 Test Loss: 0.4467036
+EarlyStopping counter: 2 out of 10
+	iters: 100, epoch: 4 | loss: 3.5853009
+	speed: 0.1645s/iter; left time: 1770.9133s
+Epoch: 4 cost time: 3.410308837890625
+Epoch: 4, Steps: 112 | Train Loss: 3.5179224 Vali Loss: 1.4837873 Test Loss: 0.4479825
+EarlyStopping counter: 3 out of 10
+	iters: 100, epoch: 5 | loss: 3.5186853
+	speed: 0.1616s/iter; left time: 1721.0085s
+Epoch: 5 cost time: 3.459929943084717
+Epoch: 5, Steps: 112 | Train Loss: 3.5092355 Vali Loss: 1.4850301 Test Loss: 0.4509711
+EarlyStopping counter: 4 out of 10
+	iters: 100, epoch: 6 | loss: 3.5239916
+	speed: 0.1629s/iter; left time: 1717.2191s
+Epoch: 6 cost time: 3.4657349586486816
+Epoch: 6, Steps: 112 | Train Loss: 3.5035637 Vali Loss: 1.4829072 Test Loss: 0.4468767
+EarlyStopping counter: 5 out of 10
+	iters: 100, epoch: 7 | loss: 3.5582209
+	speed: 0.1657s/iter; left time: 1728.3095s
+Epoch: 7 cost time: 3.546143054962158
+Epoch: 7, Steps: 112 | Train Loss: 3.5011487 Vali Loss: 1.4800924 Test Loss: 0.4492346
+EarlyStopping counter: 6 out of 10
+	iters: 100, epoch: 8 | loss: 3.4794350
+	speed: 0.1632s/iter; left time: 1683.7074s
+Epoch: 8 cost time: 3.439732551574707
+Epoch: 8, Steps: 112 | Train Loss: 3.4998084 Vali Loss: 1.4789323 Test Loss: 0.4509532
+EarlyStopping counter: 7 out of 10
+	iters: 100, epoch: 9 | loss: 3.4677410
+	speed: 0.1649s/iter; left time: 1682.7201s
+Epoch: 9 cost time: 3.5084006786346436
+Epoch: 9, Steps: 112 | Train Loss: 3.4986396 Vali Loss: 1.4809524 Test Loss: 0.4496857
+EarlyStopping counter: 8 out of 10
+	iters: 100, epoch: 10 | loss: 3.5009406
+	speed: 0.1634s/iter; left time: 1649.5851s
+Epoch: 10 cost time: 3.436768054962158
+Epoch: 10, Steps: 112 | Train Loss: 3.4983868 Vali Loss: 1.4803524 Test Loss: 0.4492817
+EarlyStopping counter: 9 out of 10
+	iters: 100, epoch: 11 | loss: 3.5544174
+	speed: 0.1603s/iter; left time: 1599.4752s
+Epoch: 11 cost time: 3.4803216457366943
+Epoch: 11, Steps: 112 | Train Loss: 3.4980846 Vali Loss: 1.4798211 Test Loss: 0.4492482
+EarlyStopping counter: 10 out of 10
+Early stopping
+>>>>>>>testing : ETTh1_720_720_TimeBridge_ETTh1_bs64_ftM_sl720_ll48_pl720_dm128_nh8_ial3_pdl1_cal0_df128_ebtimeF_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+test 2161
+test shape: (2161, 1, 720, 7) (2161, 1, 720, 7)
+test shape: (2161, 720, 7) (2161, 720, 7)
+mse:0.44322431087493896, mae:0.4685737192630768
+rmse:0.6657509207725525, mape:0.7409285306930542, mspe:41985.12109375

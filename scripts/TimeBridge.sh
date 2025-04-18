@@ -253,8 +253,8 @@ done
 
 alpha=0.35
 data_name=traffic
-GPU=0,1
-for pred_len in 336 720; do
+GPU=0,1,2,3
+for pred_len in 336 720 192 96; do
   CUDA_VISIBLE_DEVICES=$GPU \
   python -u run.py \
     --is_training 1 \
@@ -277,13 +277,13 @@ for pred_len in 336 720; do
     --ca_layers 3 \
     --pd_layers 1 \
     --ia_layers 1 \
-    --batch_size 16 \
+    --batch_size 4 \
     --attn_dropout 0.15 \
     --patience 5 \
     --train_epochs 100 \
-    --devices 0,1 \
+    --devices 0,1,2,3 \
     --use_multi_gpu \
     --alpha $alpha \
-    --learning_rate 0.001 \
+    --learning_rate 0.0005 \
     --itr 1 > logs/LongForecasting/TimeBridge/$data_name'_'$alpha'_'$model_name'_'$pred_len.logs
 done
