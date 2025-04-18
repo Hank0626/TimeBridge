@@ -4,6 +4,7 @@
 
 **[<a href="https://mp.weixin.qq.com/s/bCEWRvU-dBNwa2FxwaTMHQ">中文解读1</a>]**
 **[<a href="https://mp.weixin.qq.com/s/oFw5rXvbtqgL8clhucsAnQ">中文解读2</a>]**
+**[<a href="https://www.bilibili.com/video/BV12GC6YuEiB/?spm_id_from=333.337.search-card.all.click&vd_source=42dea39777f3aa2191db3d7e7e283b66">BiliBIli Video</a>]**
 </div>
 
 ## 🚨 Updates
