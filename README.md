@@ -1,9 +1,9 @@
 # TimeBridge: Non-Stationarity Matters for Long-term Time Series Forecasting
 
 <div align="center">
+
 **[<a href="https://mp.weixin.qq.com/s/bCEWRvU-dBNwa2FxwaTMHQ">中文解读1</a>]**
 **[<a href="https://mp.weixin.qq.com/s/oFw5rXvbtqgL8clhucsAnQ">中文解读2</a>]**
-
 </div>
 
 ## 🚨 Updates
