@@ -7,7 +7,9 @@
 **[<a href="https://www.bilibili.com/video/BV12GC6YuEiB/?spm_id_from=333.337.search-card.all.click&vd_source=42dea39777f3aa2191db3d7e7e283b66">BiliBIli Video</a>]**
 </div>
 
-## 🚨 Updates
+## Updates
+
+🚩 **2025-05-01:** TimeBridge has been accepted as **ICML 2025 Poster**. 
 
 🚩 **2025-04-18:** Release the detailed training logs (see [_logs](./_logs/)).
 
@@ -15,7 +17,7 @@
 
 🚩 **2024-10-08:** Initial upload to arXiv [[PDF]](https://arxiv.org/abs/2410.04442).
 
-## 📦 Usage
+## Usage
 
 1. Install the dependencies
     ```bash
@@ -51,7 +53,7 @@
     ```
 
 
-## 📚 Bibtex 
+## Bibtex 
 If you find this work useful, please consider citing it:
 
 ```
@@ -64,5 +66,5 @@ If you find this work useful, please consider citing it:
 }
 ```
 
-## 📬 Contact
+## Contact
 If you have any questions, please contact [lpy23@mails.tsinghua.edu.cn](lpy23@mails.tsinghua.edu.cn) or submit an issue.
