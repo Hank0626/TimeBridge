@@ -67,4 +67,4 @@ If you find this work useful, please consider citing it:
 ```
 
 ## Contact
-If you have any questions, please contact [lpy23@mails.tsinghua.edu.cn](lpy23@mails.tsinghua.edu.cn) or submit an issue.
+If you have any questions, please get in touch with [lpy23@mails.tsinghua.edu.cn](lpy23@mails.tsinghua.edu.cn) or submit an issue.
