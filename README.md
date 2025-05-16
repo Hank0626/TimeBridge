@@ -57,12 +57,11 @@
 If you find this work useful, please consider citing it:
 
 ```
-@article{liu2024time,
+@article{liu2025timebridge,
       title={TimeBridge: Non-Stationarity Matters for Long-term Time Series Forecasting}, 
       author={Liu, Peiyuan and Wu, Beiliang and Hu, Yifan and Li, Naiqi and Dai, Tao and Bao, Jigang and Xia, Shu-Tao},
-      journal={arXiv preprint arXiv:2410.04442},
-      year={2024},
-      arxiv={2410.04442}
+      journal={International Conference on Machine Learning},
+      year={2025},
 }
 ```
 
